@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chess Tournament System</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header>
+    <h1>Chess Tournament Arena</h1>
+  </header>
+  <main>
+    <section id="players">
+      <h2>Players</h2>
+      <button id="addPlayerBtn">Add Player</button>
+      <table id="playersTable">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Points</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- Players will be added here -->
+        </tbody>
+      </table>
+    </section>
+
+    <section id="pairings">
+      <h2>Pairings</h2>
+      <button id="pairingBtn">Generate Pairings</button>
+      <table id="pairingsTable">
+        <thead>
+          <tr>
+            <th>Player 1</th>
+            <th>Player 2</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- Pairings will be displayed here -->
+        </tbody>
+      </table>
+    </section>
+
+    <section id="standings">
+      <h2>Standings</h2>
+      <table id="standingsTable">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Points</th>
+            <th>Streak</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- Standings will be displayed here -->
+        </tbody>
+      </table>
+    </section>
+  </main>
+  <footer>
+    <p>&copy; Chess Tournament 2025</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
