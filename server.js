@@ -38,17 +38,21 @@ app.get('/players', (req, res) => {
   res.json(players);
 });
 
-// Generate pairings based on points
-app.get('/pairings', (req, res) => {
+// Update match result
+app.post('/updateMatchResult', (req, res) => {
+  const { player1Index, player2Index, winner } = req.body;
   const players = loadPlayers();
-  players.sort((a, b) => b.points - a.points);
-  const pairings = [];
-  for (let i = 0; i < players.length; i += 2) {
-    if (players[i + 1]) {
-      pairings.push([players[i], players[i + 1]]);
-    }
-  }
-  res.json(pairings);
+
+  const winnerPlayer = winner === 'player1' ? players[player1Index] : players[player2Index];
+  const loserPlayer = winner === 'player1' ? players[player2Index] : players[player1Index];
+
+  // Update points and streaks
+  winnerPlayer.points += 1;
+  winnerPlayer.streak += 1;
+  loserPlayer.streak = 0;
+
+  savePlayers(players);
+  res.status(200).send({ message: 'Match result updated successfully!' });
 });
 
 app.listen(port, () => {
