@@ -37,8 +37,6 @@ function removePlayer(index) {
 }
 
 function generatePairings() {
-  const round = document.getElementById('roundSelector').value;
-  const totalRounds = document.getElementById('roundsCount').value;
   players.sort((a, b) => b.points - a.points); // Sort by points descending
   const pairingsTableBody = document.querySelector('#pairingsTable tbody');
   pairingsTableBody.innerHTML = '';
