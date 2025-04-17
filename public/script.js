@@ -37,19 +37,21 @@ function removePlayer(index) {
 }
 
 function generatePairings() {
-  // Randomly shuffle the players array using Fisher-Yates shuffle
+  // Assuming players array is available
+  // Randomly shuffle the players array
   for (let i = players.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1)); // Random index from 0 to i
+    const j = Math.floor(Math.random() * (i + 1)); // Random index
     [players[i], players[j]] = [players[j], players[i]]; // Swap elements
   }
 
+  // Get the tbody element where you want to append the rows
   const pairingsTableBody = document.querySelector('#pairingsTable tbody');
-  pairingsTableBody.innerHTML = ''; // Clear the table body
+  pairingsTableBody.innerHTML = ''; // Clear any existing rows
 
-  // Generate pairings (simple pairing, can be more complex)
+  // Generate pairings
   for (let i = 0; i < players.length; i += 2) {
-    if (players[i + 1]) {
-      const row = document.createElement('tr');
+    if (players[i + 1]) { // Ensure there's a pair
+      const row = document.createElement('tr'); // Create a new table row
       row.innerHTML = `
         <td>${players[i].name}</td>
         <td>${players[i + 1].name}</td>
@@ -58,12 +60,12 @@ function generatePairings() {
           <button onclick="updateMatchResult(${i}, ${i + 1}, 'player2')">Player 2 Wins</button>
           <button onclick="updateMatchResult(${i}, ${i + 1}, 'draw')">Draw</button>
         </td>
-        <td><button onclick="endMatch(${i}, ${i + 1})">End Match</button></td>
       `;
-      pairingsTableBody.appendChild(row);
+      pairingsTableBody.appendChild(row); // Append the new row to the tbody
     }
   }
 }
+
 
 
 function updateMatchResult(player1Index, player2Index, result) {
