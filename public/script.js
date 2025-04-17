@@ -37,11 +37,16 @@ function removePlayer(index) {
 }
 
 function generatePairings() {
-  players.sort((a, b) => b.points - a.points); // Sort by points descending
+  // Randomly shuffle the players array using Fisher-Yates shuffle
+  for (let i = players.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1)); // Random index from 0 to i
+    [players[i], players[j]] = [players[j], players[i]]; // Swap elements
+  }
+
   const pairingsTableBody = document.querySelector('#pairingsTable tbody');
-  pairingsTableBody.innerHTML = '';
-  
-  const pairings = [];
+  pairingsTableBody.innerHTML = ''; // Clear the table body
+
+  // Generate pairings (simple pairing, can be more complex)
   for (let i = 0; i < players.length; i += 2) {
     if (players[i + 1]) {
       const row = document.createElement('tr');
@@ -53,11 +58,13 @@ function generatePairings() {
           <button onclick="updateMatchResult(${i}, ${i + 1}, 'player2')">Player 2 Wins</button>
           <button onclick="updateMatchResult(${i}, ${i + 1}, 'draw')">Draw</button>
         </td>
+        <td><button onclick="endMatch(${i}, ${i + 1})">End Match</button></td>
       `;
       pairingsTableBody.appendChild(row);
     }
   }
 }
+
 
 function updateMatchResult(player1Index, player2Index, result) {
   const player1 = players[player1Index];
