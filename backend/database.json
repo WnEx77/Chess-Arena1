@@ -1,0 +1,6 @@
+[
+  { "name": "Player 1", "points": 10, "streak": 3 },
+  { "name": "Player 2", "points": 8, "streak": 2 },
+  { "name": "Player 3", "points": 12, "streak": 5 },
+  { "name": "Player 4", "points": 6, "streak": 1 }
+]
