@@ -38,6 +38,7 @@ function removePlayer(index) {
 
 function generatePairings() {
   const round = document.getElementById('roundSelector').value;
+  const totalRounds = document.getElementById('roundsCount').value;
   players.sort((a, b) => b.points - a.points); // Sort by points descending
   const pairingsTableBody = document.querySelector('#pairingsTable tbody');
   pairingsTableBody.innerHTML = '';
@@ -52,6 +53,7 @@ function generatePairings() {
         <td>
           <button onclick="updateMatchResult(${i}, ${i + 1}, 'player1')">Player 1 Wins</button>
           <button onclick="updateMatchResult(${i}, ${i + 1}, 'player2')">Player 2 Wins</button>
+          <button onclick="updateMatchResult(${i}, ${i + 1}, 'draw')">Draw</button>
         </td>
       `;
       pairingsTableBody.appendChild(row);
@@ -59,14 +61,22 @@ function generatePairings() {
   }
 }
 
-function updateMatchResult(player1Index, player2Index, winner) {
-  const winnerPlayer = winner === 'player1' ? players[player1Index] : players[player2Index];
-  const loserPlayer = winner === 'player1' ? players[player2Index] : players[player1Index];
+function updateMatchResult(player1Index, player2Index, result) {
+  const player1 = players[player1Index];
+  const player2 = players[player2Index];
 
-  // Update points and streaks
-  winnerPlayer.points += 1;
-  winnerPlayer.streak += 1;
-  loserPlayer.streak = 0;
+  if (result === 'player1') {
+    player1.points += 1;
+    player1.streak += 1;
+    player2.streak = 0;
+  } else if (result === 'player2') {
+    player2.points += 1;
+    player2.streak += 1;
+    player1.streak = 0;
+  } else if (result === 'draw') {
+    player1.points += 0.5;
+    player2.points += 0.5;
+  }
 
   renderPlayers();
   updateStandings();
